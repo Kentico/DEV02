@@ -8,8 +8,6 @@ using CMS.Scheduler;
 using CMS.EventLog;
 using CMS.Helpers;
 
-using DoctorAppointments;
-
 /// <summary>
 /// Scheduled task for importing list of doctors from source .csv file provided by path.
 /// </summary>
