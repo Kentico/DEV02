@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using CMS;
 using CMS.DataEngine;
 using CMS.Helpers;
+
 using DoctorAppointments;
 
 [assembly: RegisterObjectType(typeof(DoctorInfo), DoctorInfo.OBJECT_TYPE)]

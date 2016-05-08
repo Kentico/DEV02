@@ -7,7 +7,7 @@ using CMS.Helpers;
 /// <summary>
 /// Summary description for DoctorAppointmentsMacroMethods
 /// </summary>
-// Makes all methods in the 'DoctorAppointmentsMacroMethods' container class available for int objects
+// Makes all methods in the 'DoctorAppointmentsMacroMethods' container class available for objects
 [assembly: RegisterExtension(typeof(DoctorAppointmentsMacroMethods), typeof(object))]
 public class DoctorAppointmentsMacroMethods : MacroMethodContainer
 {
