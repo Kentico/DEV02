@@ -68,7 +68,8 @@
     <Compile Include="Appointment\AppointmentInfo.cs" />
     <Compile Include="Appointment\AppointmentInfoProvider.cs" />
     <Compile Include="DoctorAppointments.cs" />
-    <Compile Include="Doctor\DoctorImport.cs" />
+    <Compile Include="Doctor\DoctorImportEx1.cs" />
+    <Compile Include="Doctor\DoctorImportEx2.cs" />
     <Compile Include="Doctor\DoctorInfo.cs" />
     <Compile Include="Doctor\DoctorInfoProvider.cs" />
     <Compile Include="Doctor\DoctorMacroMethods.cs" />
