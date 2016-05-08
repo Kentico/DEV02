@@ -13,7 +13,7 @@ using CMS.Helpers;
 /// </summary>
 namespace DoctorAppointments
 {
-    public class DoctorImport : ITask
+    public class DoctorImportEx2 : ITask
     {
         public string Execute(TaskInfo ti)
         {
