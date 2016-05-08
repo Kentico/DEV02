@@ -1,10 +1,7 @@
 using System;
-using System.Data;
-
-using CMS.Base;
-using CMS.DataEngine;
-using CMS.Helpers;
 using System.Collections.Generic;
+
+using CMS.DataEngine;
 
 namespace DoctorAppointments
 {    
@@ -98,6 +95,10 @@ namespace DoctorAppointments
         }
 
 
+        /// <summary>
+        /// Inserts / Updates list of DoctorInfos.
+        /// </summary>
+        /// <param name="doctors">List of DoctorInfos</param>
         public static int SetDoctors(List<DoctorInfo> doctors)
         {
             int count = 0;

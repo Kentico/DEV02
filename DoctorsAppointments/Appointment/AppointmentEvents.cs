@@ -28,15 +28,15 @@ public partial class CMSModuleLoader
         /// </summary>
         private void Insert_After(object sender, ObjectEventArgs e)
         {
-            // cast object to AppoinmentInfo class so that we can access its properties
+            // Cast object to AppoinmentInfo class so that we can access its properties
             var appointment = (AppointmentInfo)e.Object;
 
-            // get DoctorInfo in order to retrieve his e-mail
+            // Get DoctorInfo in order to retrieve his e-mail
             var doctor = DoctorInfoProvider.GetDoctorInfo(appointment.AppointmentDoctorID);
 
             if (doctor != null)
             {
-                // prepare body of e-mail
+                // Prepare body of e-mail
                 var plainTextBody = String.Format("There is a new appointment request by {0} {1} for {2}. Please get back to patient with available dates on e-mail address {3}",
                     appointment.AppointmentPatientFirstName,
                     appointment.AppointmentPatientLastName,
@@ -49,8 +49,7 @@ public partial class CMSModuleLoader
                     appointment.AppointmentDate.ToShortDateString(),
                     appointment.AppointmentPatientEmail);
 
-
-                // create e-mail
+                // Create e-mail
                 var email = new EmailMessage()
                 {
                     Subject = string.Format("New appointment: {0} {1}", appointment.AppointmentPatientFirstName, appointment.AppointmentPatientLastName),
@@ -60,7 +59,7 @@ public partial class CMSModuleLoader
                     From = "noreply@local.com"
                 };
 
-                // send e-mail
+                // Send e-mail
                 EmailSender.SendEmail(email);
             }
         }

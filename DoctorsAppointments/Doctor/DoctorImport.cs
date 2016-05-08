@@ -26,7 +26,6 @@ namespace DoctorAppointments
 
                 if (File.Exists(filePath))
                 {
-                    //ToDo: Add import method to AppointmentInfoProvider
                     using (var context = new CMSActionContext())
                     {
                         // Disable logging of all system operations like event log, web farm task etc. to improve performance.
