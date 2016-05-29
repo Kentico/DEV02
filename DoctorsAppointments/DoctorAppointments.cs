@@ -1,6 +1,8 @@
 ﻿using CMS;
 using CMS.DataEngine;
- 
+
+using DoctorAppointments;
+
 [assembly: RegisterModule(typeof(DoctorAppointmentsModule))]
  
 public class DoctorAppointmentsModule : Module
@@ -16,5 +18,8 @@ public class DoctorAppointmentsModule : Module
     protected override void OnInit()
     {
         base.OnInit();
+
+        // Custom event handler executed after the appointment is created
+        AppointmentInfo.TYPEINFO.Events.Insert.After += AppointmentEvents.Insert_After;
     }
 }

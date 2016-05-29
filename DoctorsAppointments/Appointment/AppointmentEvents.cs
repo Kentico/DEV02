@@ -1,67 +1,50 @@
 ﻿using System;
 
-using CMS.Base;
 using CMS.EmailEngine;
 using CMS.DataEngine;
 
 using DoctorAppointments;
 
-[AppointmentEvents]
-public partial class CMSModuleLoader
+public class AppointmentEvents
 {
     /// <summary>
-    /// Attribute class that ensures the loading of custom handlers.
+    /// Executed whenever a new record of AppointmentInfo class is inserted
     /// </summary>
-    private class AppointmentEvents : CMSLoaderAttribute
+    public static void Insert_After(object sender, ObjectEventArgs e)
     {
-        /// <summary>
-        /// The system executes the Init method of the CMSModuleLoader attributes when the application starts.
-        /// </summary>
-        public override void Init()
+        // Cast object to AppoinmentInfo class so that we can access its properties
+        var appointment = (AppointmentInfo)e.Object;
+
+        // Get DoctorInfo in order to retrieve his e-mail
+        var doctor = DoctorInfoProvider.GetDoctorInfo(appointment.AppointmentDoctorID);
+
+        if (doctor != null)
         {
-            // Assigns custom handlers to events
-            AppointmentInfo.TYPEINFO.Events.Insert.After += Insert_After;
-        }
+            // Prepare body of e-mail
+            var plainTextBody = String.Format("There is a new appointment request by {0} {1} for {2}. Please get back to patient with available dates on e-mail address {3}",
+                appointment.AppointmentPatientFirstName,
+                appointment.AppointmentPatientLastName,
+                appointment.AppointmentDate.ToShortDateString(),
+                appointment.AppointmentPatientEmail);
 
-        /// <summary>
-        /// Register an event that is executed whenever a new record of AppointmentInfo class is inserted
-        /// </summary>
-        private void Insert_After(object sender, ObjectEventArgs e)
-        {
-            // Cast object to AppoinmentInfo class so that we can access its properties
-            var appointment = (AppointmentInfo)e.Object;
+            var htmlBody = String.Format("<h1>New appointment</h1><p>There is a new appointment request by {0} {1} for {2}. Please get back to patient with available dates on e-mail address {3}</p>",
+                appointment.AppointmentPatientFirstName,
+                appointment.AppointmentPatientLastName,
+                appointment.AppointmentDate.ToShortDateString(),
+                appointment.AppointmentPatientEmail);
 
-            // Get DoctorInfo in order to retrieve his e-mail
-            var doctor = DoctorInfoProvider.GetDoctorInfo(appointment.AppointmentDoctorID);
-
-            if (doctor != null)
+            // Create e-mail
+            var email = new EmailMessage()
             {
-                // Prepare body of e-mail
-                var plainTextBody = String.Format("There is a new appointment request by {0} {1} for {2}. Please get back to patient with available dates on e-mail address {3}",
-                    appointment.AppointmentPatientFirstName,
-                    appointment.AppointmentPatientLastName,
-                    appointment.AppointmentDate.ToShortDateString(),
-                    appointment.AppointmentPatientEmail);
+                Subject = string.Format("New appointment: {0} {1}", appointment.AppointmentPatientFirstName, appointment.AppointmentPatientLastName),
+                Recipients = doctor.DoctorEmail,
+                PlainTextBody = plainTextBody,
+                Body = htmlBody,
+                From = "noreply@local.com"
+            };
 
-                var htmlBody = String.Format("<h1>New appointment</h1><p>There is a new appointment request by {0} {1} for {2}. Please get back to patient with available dates on e-mail address {3}</p>",
-                    appointment.AppointmentPatientFirstName,
-                    appointment.AppointmentPatientLastName,
-                    appointment.AppointmentDate.ToShortDateString(),
-                    appointment.AppointmentPatientEmail);
-
-                // Create e-mail
-                var email = new EmailMessage()
-                {
-                    Subject = string.Format("New appointment: {0} {1}", appointment.AppointmentPatientFirstName, appointment.AppointmentPatientLastName),
-                    Recipients = doctor.DoctorEmail,
-                    PlainTextBody = plainTextBody,
-                    Body = htmlBody,
-                    From = "noreply@local.com"
-                };
-
-                // Send e-mail
-                EmailSender.SendEmail(email);
-            }
+            // Send e-mail
+            EmailSender.SendEmail(email);
         }
     }
 }
