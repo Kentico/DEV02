@@ -29,7 +29,7 @@ namespace DoctorAppointments
         /// <summary>
         /// Type information.
         /// </summary>
-        public static ObjectTypeInfo TYPEINFO = new ObjectTypeInfo(typeof(DoctorInfoProvider), OBJECT_TYPE, "DoctorAppointments.Doctor", "DoctorID", "DoctorLastModified", "DoctorGuid", "DoctorCodeName", null, null, null, null, null)
+        public static ObjectTypeInfo TYPEINFO = new ObjectTypeInfo(typeof(DoctorInfoProvider), OBJECT_TYPE, "DoctorAppointments.Doctor", "DoctorID", "DoctorLastModified", "DoctorGuid", "DoctorCodeName", "DoctorLastName", null, null, null, null)
         {
 			ModuleName = "DoctorAppointments",
 			TouchCacheDependencies = true,
