@@ -33,7 +33,7 @@ namespace DoctorAppointments
         {
 			ModuleName = "DoctorAppointments",
 			TouchCacheDependencies = true,
-            LogEvents = true,
+            		LogEvents = true,
         };
 
         #endregion
