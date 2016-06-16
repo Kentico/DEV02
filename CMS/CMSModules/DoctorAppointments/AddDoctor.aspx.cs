@@ -10,6 +10,7 @@ public partial class AddDoctor : System.Web.UI.Page
         var doctor = new DoctorInfo();
         doctor.DoctorFirstName = "John";
         doctor.DoctorLastName = "Smith";
+        doctor.DoctorCodeName = "JohnSmith";
         doctor.DoctorEmail = "JSmith@hospital.com";
         doctor.DoctorSpecialty = "Family Medicine";
         doctor.DoctorLastModified = DateTime.Now;
