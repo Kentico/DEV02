@@ -25,18 +25,19 @@ namespace DoctorAppointments
 
                 if (File.Exists(filePath))
                 {
-                    // Read all lines separated by semicolon
-                    var lines = File.ReadAllLines(filePath).Select(a => a.Split(';'));
+                    // Read all lines
+                    var lines = File.ReadAllLines(filePath);
 
                     var doctors = new List<DoctorInfo>();
 
                     // Loop through each line and get individual fields: column0 = FisrtName, column1 = LastName, column2 = Email, column3 = Number, column4 = Speciality
                     foreach (var line in lines)
                     {
-                        var fields = line[0].Split(',');
+                        var fields = line.Split(',');
 
                         // Create new doctor
-                        var doctor = new DoctorInfo(){
+                        var doctor = new DoctorInfo()
+                        {
                             DoctorFirstName = fields[0],
                             DoctorLastName = fields[1],
                             DoctorEmail = fields[2],
